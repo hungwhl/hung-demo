@@ -1,12 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>master document</title>
-</head>
-<body>
-    <p>fakfeawlksdkl</p>
-</body>
+<html>
+  <head>
+    <title>Material Availability and Site</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  </head>
+  <body>
+    <h1>Material Availability and Site</h1>
+    <form>
+      <p>1. Material available:</p>
+      <input type="radio" id="A1" name="material" value="pc-tz" checked>
+      <label for="A1">a pc tz.</label><br>
+      <input type="radio" id="A2" name="material" value="pc-py">
+      <label for="A2">a pc py.</label><br>
+      <input type="radio" id="A3" name="material" value="other">
+      <label for="A3">Other:</label>
+      <input type="text" id="Asupptext" name="supp" disabled><br>
+
+      <p>2. Site:</p>
+      <input type="radio" id="B1" name="site" value="stomach" checked>
+      <label for="B1">Stomach</label><br>
+      <input type="radio" id="B2" name="site" value="body">
+      <label for="B2">Body</label><br>
+      <input type="radio" id="B3" name="site" value="other">
+      <label for="B3">Other:</label>
+      <input type="text" id="Bsupptext" name="supp2" disabled><br>
+
+      <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <script>
+      function submitForm() {
+        const material = document.querySelector('input[name="material"]:checked').value;
+        const site = document.querySelector('input[name="site"]:checked').value;
+        let message = "1. Material available: " + material + "\n2. Site: " + site;
+
+        if (material === "other") {
+          const suppText = document.getElementById("Asupptext").value;
+          message += "\nAdditional text entered for Material: " + suppText;
+        }
+
+        if (site === "other") {
+          const suppText2 = document.getElementById("Bsupptext").value;
+          message += "\nAdditional text entered for Site: " + suppText2;
+        }
+
+        alert(message);
+      }
+/* 
+      document.getElementById("A3").addEventListener("click", function() {
+        document.getElementById("Asupptext").disabled = false;
+        document.getElementById("Asupptext").focus();
+      });
+
+      document.getElementById("A2").addEventListener("click", function() {
+        document.getElementById("Asupptext").disabled = true;
+      });
+
+      document.getElementById("A1").addEventListener("click", function() {
+        document.getElementById("Asupptext").disabled = true;
+      });
+
+      document.getElementById("B3").addEventListener("click", function() {
+        document.getElementById("Bsupptext").disabled = false;
+        document.getElementById("Bsupptext").focus();
+      });
+
+            document.getElementById("B2").addEventListener("click", function() {
+        document.getElementById("Bsupptext").disabled = false;
+      });
+
+      document.getElementById("B1").addEventListener("click", function() {
+        document.getElementById("Bsupptext").disabled = false;
+      }); */
+      $("#A3").on("click", function() {
+          $("#Asupptext").prop("disabled", false).focus();
+        });
+
+$("#A2, #A1").on("click", function() {
+  $("#Asupptext").prop("disabled", true);
+});
+
+$("#B3").on("click", function() {
+  $("#Bsupptext").prop("disabled", false).focus();
+});
+
+$("#B2, #B1").on("click", function() {
+  $("#Bsupptext").prop("disabled", true);
+});
+
+
+    </script>
+  </body>
 </html>
+
